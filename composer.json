@@ -28,8 +28,6 @@
             "Misaf\\AuthifyLog\\Database\\Seeders\\": "database/seeders/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "laravel": {
             "providers": [
