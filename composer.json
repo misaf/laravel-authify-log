@@ -36,14 +36,5 @@
                 "Misaf\\AuthifyLog\\Providers\\AuthifyLogServiceProvider"
             ]
         }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../app-modules/*",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+    }
 }
