@@ -2,7 +2,7 @@
     "name": "misaf/laravel-authify-log",
     "description": "A logging utility for user authentication activities in Laravel.",
     "type": "library",
-    "version": "v1.0.1",
+    "version": "1.0.1",
     "license": "MIT",
     "keywords": [
         "laravel",
