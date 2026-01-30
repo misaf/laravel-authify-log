@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Misaf\AuthifyLog\Database\Factories\AuthifyLogFactory;
 use Misaf\AuthifyLog\Enums\AuthifyLogActionEnum;
-use Misaf\Tenant\Traits\BelongsToTenant;
+use Misaf\VendraTenant\Traits\BelongsToTenant;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 

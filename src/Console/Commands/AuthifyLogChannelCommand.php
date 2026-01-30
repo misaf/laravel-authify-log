@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Misaf\AuthifyLog\Jobs\AuthifyLogJob;
-use Misaf\Tenant\Models\Tenant;
+use Misaf\VendraTenant\Models\Tenant;
 
 final class AuthifyLogChannelCommand extends Command
 {

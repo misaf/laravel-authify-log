@@ -7,8 +7,8 @@ namespace Misaf\AuthifyLog\Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Misaf\AuthifyLog\Enums\AuthifyLogActionEnum;
 use Misaf\AuthifyLog\Models\AuthifyLog;
-use Misaf\Tenant\Models\Tenant;
-use Misaf\User\Models\User;
+use Misaf\VendraTenant\Models\Tenant;
+use Misaf\VendraUser\Models\User;
 
 /**
  * @extends Factory<AuthifyLog>

@@ -20,8 +20,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Redis;
 use Misaf\AuthifyLog\Enums\AuthifyLogActionEnum;
 use Misaf\AuthifyLog\Notifications\LoginNotification;
-use Misaf\Tenant\Models\Tenant;
-use Misaf\User\Models\User;
+use Misaf\VendraTenant\Models\Tenant;
+use Misaf\VendraUser\Models\User;
 
 final class AuthifyLogListener
 {
