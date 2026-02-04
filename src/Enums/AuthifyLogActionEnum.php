@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Enums;
+namespace Misaf\LaravelAuthifyLog\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 

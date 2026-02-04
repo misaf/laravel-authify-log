@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Jobs;
+namespace Misaf\LaravelAuthifyLog\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,8 +10,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Misaf\AuthifyLog\Jobs\Middleware\RateLimited;
-use Misaf\AuthifyLog\Models\AuthifyLog;
+use Misaf\LaravelAuthifyLog\Jobs\Middleware\RateLimited;
+use Misaf\LaravelAuthifyLog\Models\AuthifyLog;
 use Throwable;
 
 final class AuthifyLogJob implements ShouldQueue

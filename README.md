@@ -30,7 +30,7 @@ Publish the service provider (optional for customization):
 
 bash
 Copy code
-php artisan vendor:publish --provider="Misaf\AuthifyLog\Providers\AuthifyLogServiceProvider"
+php artisan vendor:publish --provider="Misaf\LaravelAuthifyLog\Providers\AuthifyLogServiceProvider"
 Log authentication events automatically:
 
 The package hooks into Laravel’s authentication events by default:

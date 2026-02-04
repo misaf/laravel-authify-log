@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Providers;
+namespace Misaf\LaravelAuthifyLog\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -14,6 +14,6 @@ final class AuthifyLogServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../lang' => $this->app->langPath('vendor/laravel-authify-log'),
-        ], 'authify-log');
+        ], 'laravel-authify-log');
     }
 }

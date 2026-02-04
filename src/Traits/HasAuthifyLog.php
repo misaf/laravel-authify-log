@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Traits;
+namespace Misaf\LaravelAuthifyLog\Traits;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Misaf\AuthifyLog\Models\AuthifyLog;
+use Misaf\LaravelAuthifyLog\Models\AuthifyLog;
 
 trait HasAuthifyLog
 {

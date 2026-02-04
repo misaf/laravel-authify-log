@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Notifications;
+namespace Misaf\LaravelAuthifyLog\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Config;
-use Misaf\AuthifyLog\Contracts\HasUsername;
+use Misaf\LaravelAuthifyLog\Contracts\HasUsername;
 use RuntimeException;
 
 final class LoginNotification extends Notification implements ShouldQueue

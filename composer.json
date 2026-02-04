@@ -4,7 +4,7 @@
     "description": "A logging utility for user authentication activities in Laravel.",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.6",
     "keywords": [
         "laravel",
         "authify",
@@ -18,21 +18,20 @@
     ],
     "require": {
         "php": "^8.3",
-        "stijnvanouplines/blade-country-flags": "^1.0.6",
-        "spatie/laravel-package-tools": "^1.92.4"
+        "stijnvanouplines/blade-country-flags": "^1.0.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24.1",
-        "larastan/larastan": "^3.9.1",
-        "laravel/boost": "^2.0.4",
+        "larastan/larastan": "^3.9.2",
+        "laravel/boost": "^2.0.6",
         "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.3",
         "orchestra/testbench": "^10.9",
         "pestphp/pest": "^4.3.2",
         "pestphp/pest-plugin-laravel": "^4.0",
-        "pestphp/pest-plugin-profanity": "^4.2",
-        "pestphp/pest-plugin-type-coverage": "^4.0"
+        "pestphp/pest-plugin-profanity": "^4.2.1",
+        "pestphp/pest-plugin-type-coverage": "^4.0.3"
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
@@ -40,16 +39,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Misaf\\AuthifyLog\\": "src/",
-            "Misaf\\AuthifyLog\\Tests\\": "tests/",
-            "Misaf\\AuthifyLog\\Database\\Factories\\": "database/factories/",
-            "Misaf\\AuthifyLog\\Database\\Seeders\\": "database/seeders/"
+            "Misaf\\LaravelAuthifyLog\\": "src/",
+            "Misaf\\LaravelAuthifyLog\\Tests\\": "tests/",
+            "Misaf\\LaravelAuthifyLog\\Database\\Factories\\": "database/factories/",
+            "Misaf\\LaravelAuthifyLog\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Misaf\\AuthifyLog\\Providers\\AuthifyLogServiceProvider"
+                "Misaf\\LaravelAuthifyLog\\Providers\\AuthifyLogServiceProvider"
             ]
         }
     },

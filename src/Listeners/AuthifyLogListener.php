@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Listeners;
+namespace Misaf\LaravelAuthifyLog\Listeners;
 
 use Illuminate\Auth\Events\Attempting;
 use Illuminate\Auth\Events\Authenticated;
@@ -18,8 +18,8 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Redis;
-use Misaf\AuthifyLog\Enums\AuthifyLogActionEnum;
-use Misaf\AuthifyLog\Notifications\LoginNotification;
+use Misaf\LaravelAuthifyLog\Enums\AuthifyLogActionEnum;
+use Misaf\LaravelAuthifyLog\Notifications\LoginNotification;
 use Misaf\VendraTenant\Models\Tenant;
 use Misaf\VendraUser\Models\User;
 

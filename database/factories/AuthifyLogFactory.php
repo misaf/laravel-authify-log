@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Database\Factories;
+namespace Misaf\LaravelAuthifyLog\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Auth\User;
-use Misaf\AuthifyLog\Enums\AuthifyLogActionEnum;
-use Misaf\AuthifyLog\Models\AuthifyLog;
+use Misaf\LaravelAuthifyLog\Enums\AuthifyLogActionEnum;
+use Misaf\LaravelAuthifyLog\Models\AuthifyLog;
 
 /**
  * @extends Factory<AuthifyLog>

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Models;
+namespace Misaf\LaravelAuthifyLog\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use Misaf\AuthifyLog\Database\Factories\AuthifyLogFactory;
-use Misaf\AuthifyLog\Enums\AuthifyLogActionEnum;
+use Misaf\LaravelAuthifyLog\Database\Factories\AuthifyLogFactory;
+use Misaf\LaravelAuthifyLog\Enums\AuthifyLogActionEnum;
 
 /**
  * @property int $id

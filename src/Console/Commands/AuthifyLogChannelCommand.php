@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Console\Commands;
+namespace Misaf\LaravelAuthifyLog\Console\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
-use Misaf\AuthifyLog\Jobs\AuthifyLogJob;
+use Misaf\LaravelAuthifyLog\Jobs\AuthifyLogJob;
 use Misaf\VendraTenant\Models\Tenant;
 
 final class AuthifyLogChannelCommand extends Command

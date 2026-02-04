@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Contracts;
+namespace Misaf\LaravelAuthifyLog\Contracts;
 
 interface HasUsername
 {

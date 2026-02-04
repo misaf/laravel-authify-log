@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Misaf\AuthifyLog\Jobs\Middleware;
+namespace Misaf\LaravelAuthifyLog\Jobs\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
-use Misaf\AuthifyLog\Jobs\AuthifyLogJob;
+use Misaf\LaravelAuthifyLog\Jobs\AuthifyLogJob;
 
 final class RateLimited
 {
