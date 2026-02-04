@@ -9,13 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Misaf\AuthifyLog\Database\Factories\AuthifyLogFactory;
 use Misaf\AuthifyLog\Enums\AuthifyLogActionEnum;
-use Misaf\VendraTenant\Traits\BelongsToTenant;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * @property int $id
- * @property int $tenant_id
  * @property int $user_id
  * @property AuthifyLogActionEnum $action
  * @property string $ip_address
@@ -26,17 +22,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 final class AuthifyLog extends Model
 {
-    use BelongsToTenant;
     /** @use HasFactory<AuthifyLogFactory> */
     use HasFactory;
-    use LogsActivity;
 
     /**
      * @var array<string, string>
      */
     protected $casts = [
         'id'         => 'integer',
-        'tenant_id'  => 'integer',
         'user_id'    => 'integer',
         'action'     => AuthifyLogActionEnum::class,
         'ip_address' => 'string',
@@ -54,19 +47,4 @@ final class AuthifyLog extends Model
         'ip_country',
         'user_agent',
     ];
-
-    /**
-     * @var list<string>
-     */
-    protected $hidden = [
-        'tenant_id',
-    ];
-
-    /**
-     * @return LogOptions
-     */
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()->logFillable()->logExcept(['id']);
-    }
 }

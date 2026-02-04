@@ -1,9 +1,10 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "misaf/laravel-authify-log",
     "description": "A logging utility for user authentication activities in Laravel.",
     "type": "library",
-    "version": "1.0.5",
     "license": "MIT",
+    "version": "1.0.0",
     "keywords": [
         "laravel",
         "authify",
@@ -20,6 +21,23 @@
         "stijnvanouplines/blade-country-flags": "^1.0.6",
         "spatie/laravel-package-tools": "^1.92.4"
     },
+    "require-dev": {
+        "fakerphp/faker": "^1.24.1",
+        "larastan/larastan": "^3.9.1",
+        "laravel/boost": "^2.0.4",
+        "laravel/pint": "^1.27",
+        "mockery/mockery": "^1.6.12",
+        "nunomaduro/collision": "^8.8.3",
+        "orchestra/testbench": "^10.9",
+        "pestphp/pest": "^4.3.2",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-profanity": "^4.2",
+        "pestphp/pest-plugin-type-coverage": "^4.0"
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "pest"
+    },
     "autoload": {
         "psr-4": {
             "Misaf\\AuthifyLog\\": "src/",
@@ -34,5 +52,16 @@
                 "Misaf\\AuthifyLog\\Providers\\AuthifyLogServiceProvider"
             ]
         }
-    }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

@@ -10,10 +10,10 @@ final class AuthifyLogServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'authify-log');
+        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'laravel-authify-log');
 
         $this->publishes([
-            __DIR__ . '/../../lang' => $this->app->langPath('vendor/authify-log'),
-        ], 'authify-log-lang');
+            __DIR__ . '/../../lang' => $this->app->langPath('vendor/laravel-authify-log'),
+        ], 'authify-log');
     }
 }

@@ -25,7 +25,6 @@ return new class () extends Migration {
     {
         Schema::create('authify_logs', function (Blueprint $table): void {
             $table->id();
-            $table->unsignedBigInteger('tenant_id');
             $table->unsignedBigInteger('user_id');
             $table->tinyInteger('action');
             $table->ipAddress('ip_address');
@@ -34,9 +33,9 @@ return new class () extends Migration {
             $table->mediumText('user_agent');
             $table->timestampsTz();
 
-            $table->index(['tenant_id', 'user_id']);
-            $table->index(['tenant_id', 'action']);
-            $table->index(['tenant_id', 'ip_address']);
+            $table->index(['user_id']);
+            $table->index(['action']);
+            $table->index(['ip_address']);
         });
     }
 };
