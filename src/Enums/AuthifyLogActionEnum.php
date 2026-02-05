@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Misaf\LaravelAuthifyLog\Enums;
 
-use Filament\Support\Contracts\HasLabel;
-
-enum AuthifyLogActionEnum: int implements HasLabel
+enum AuthifyLogActionEnum: int
 {
     case Authenticated = 1;
     case AuthenticationAttempt = 2;
@@ -32,18 +30,18 @@ enum AuthifyLogActionEnum: int implements HasLabel
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::Authenticated         => __('authify-log::action-enum.authenticated'),
-            self::AuthenticationAttempt => __('authify-log::action-enum.authentication_attempt'),
-            self::CurrentDeviceLogout   => __('authify-log::action-enum.current_device_logout'),
-            self::FailedLogin           => __('authify-log::action-enum.failed_login'),
-            self::Lockout               => __('authify-log::action-enum.lockout'),
-            self::OtherDeviceLogout     => __('authify-log::action-enum.other_device_logout'),
-            self::PasswordReset         => __('authify-log::action-enum.password_reset'),
-            self::RegisteredUser        => __('authify-log::action-enum.registered_user'),
-            self::SuccessfulLogin       => __('authify-log::action-enum.successful_login'),
-            self::SuccessfulLogout      => __('authify-log::action-enum.successful_logout'),
-            self::Validated             => __('authify-log::action-enum.validated'),
-            self::Verified              => __('authify-log::action-enum.verified'),
+            self::Authenticated         => __('laravel-authify-log::action-enum.authenticated'),
+            self::AuthenticationAttempt => __('laravel-authify-log::action-enum.authentication_attempt'),
+            self::CurrentDeviceLogout   => __('laravel-authify-log::action-enum.current_device_logout'),
+            self::FailedLogin           => __('laravel-authify-log::action-enum.failed_login'),
+            self::Lockout               => __('laravel-authify-log::action-enum.lockout'),
+            self::OtherDeviceLogout     => __('laravel-authify-log::action-enum.other_device_logout'),
+            self::PasswordReset         => __('laravel-authify-log::action-enum.password_reset'),
+            self::RegisteredUser        => __('laravel-authify-log::action-enum.registered_user'),
+            self::SuccessfulLogin       => __('laravel-authify-log::action-enum.successful_login'),
+            self::SuccessfulLogout      => __('laravel-authify-log::action-enum.successful_logout'),
+            self::Validated             => __('laravel-authify-log::action-enum.validated'),
+            self::Verified              => __('laravel-authify-log::action-enum.verified'),
         };
     }
 }

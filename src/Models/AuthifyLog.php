@@ -20,7 +20,7 @@ use Misaf\LaravelAuthifyLog\Enums\AuthifyLogActionEnum;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-final class AuthifyLog extends Model
+class AuthifyLog extends Model
 {
     /** @use HasFactory<AuthifyLogFactory> */
     use HasFactory;

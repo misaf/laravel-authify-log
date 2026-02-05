@@ -16,12 +16,11 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Redis;
 use Misaf\LaravelAuthifyLog\Enums\AuthifyLogActionEnum;
 use Misaf\LaravelAuthifyLog\Notifications\LoginNotification;
-use Misaf\VendraTenant\Models\Tenant;
-use Misaf\VendraUser\Models\User;
 
 final class AuthifyLogListener
 {
@@ -98,7 +97,6 @@ final class AuthifyLogListener
 
         $timestamp = Carbon::now()->toDateTimeString();
         $logEntry = [
-            'tenant_id'  => Tenant::current()->id,
             'user_id'    => $userId,
             'action'     => $action->value,
             'ip_address' => request()->ip(),
