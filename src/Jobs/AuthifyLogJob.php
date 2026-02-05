@@ -9,12 +9,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
-use Misaf\LaravelAuthifyLog\Jobs\Middleware\RateLimited;
-use Misaf\LaravelAuthifyLog\Models\AuthifyLog;
 use Throwable;
 
-final class AuthifyLogJob implements ShouldQueue
+class AuthifyLogJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -22,26 +21,31 @@ final class AuthifyLogJob implements ShouldQueue
     use SerializesModels;
 
     /**
-     * @param  array<int, array<string, int|string>>  $records
+     * @param array<int, array<string, int|string>> $records
      */
     public function __construct(public array $records) {}
 
     public function handle(): void
     {
         try {
-            AuthifyLog::insert($this->records);
+            $modelClass = Config::string('authify-log.model');
+
+            $modelClass::insert($this->records);
         } catch (Throwable $e) {
             Log::critical('Unexpected error during AuthifyLogJob execution', ['error' => $e->getMessage()]);
         }
     }
 
-    // /**
-    //  * @return array<int, object>
-    //  */
-    // public function middleware(): array
-    // {
-    //     return [new RateLimited()];
-    // }
+    /**
+     * @return object[]
+     */
+    public function middleware(): array
+    {
+        /** @var class-string[] $middlewares */
+        $middlewares = Config::array('authify-log.jobs_middleware');
+
+        return array_map(fn($middleware) => new $middleware(), $middlewares);
+    }
 
     public function failed(?Throwable $exception): void
     {

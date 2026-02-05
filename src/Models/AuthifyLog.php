@@ -12,7 +12,7 @@ use Misaf\LaravelAuthifyLog\Enums\AuthifyLogActionEnum;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property int|null $user_id
  * @property AuthifyLogActionEnum $action
  * @property string $ip_address
  * @property string $ip_country

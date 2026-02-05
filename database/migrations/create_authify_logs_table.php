@@ -25,7 +25,8 @@ return new class () extends Migration {
     {
         Schema::create('authify_logs', function (Blueprint $table): void {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')
+                ->nullable();
             $table->tinyInteger('action');
             $table->ipAddress('ip_address');
             $table->char('ip_country', 2)

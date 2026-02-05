@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Misaf\LaravelAuthifyLog\Jobs\AuthifyLogJob;
 
-final class RateLimited
+class RateLimited
 {
     public function handle(AuthifyLogJob $job, Closure $next): void
     {

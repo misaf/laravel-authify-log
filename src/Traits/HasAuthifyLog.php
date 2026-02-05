@@ -6,31 +6,40 @@ namespace Misaf\LaravelAuthifyLog\Traits;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Misaf\LaravelAuthifyLog\Models\AuthifyLog;
+use Illuminate\Support\Facades\Config;
 
+/**
+ * @template AuthifyLog of \Illuminate\Database\Eloquent\Model
+ */
 trait HasAuthifyLog
 {
     /**
-     * @return HasOne<AuthifyLog, $this>
+     * @return HasOne<AuthifyLog>
      */
     public function latestAuthifyLog(): HasOne
     {
-        return $this->hasOne(AuthifyLog::class)->latestOfMany();
+        $modelClass = Config::string('authify-log.model');
+
+        return $this->hasOne($modelClass)->latestOfMany();
     }
 
     /**
-     * @return HasOne<AuthifyLog, $this>
+     * @return HasOne<AuthifyLog>
      */
     public function oldestAuthifyLog(): HasOne
     {
-        return $this->hasOne(AuthifyLog::class)->oldestOfMany();
+        $modelClass = Config::string('authify-log.model');
+
+        return $this->hasOne($modelClass)->oldestOfMany();
     }
 
     /**
-     * @return HasMany<AuthifyLog, $this>
+     * @return HasOne<AuthifyLog>
      */
     public function authifyLogs(): HasMany
     {
-        return $this->hasMany(AuthifyLog::class);
+        $modelClass = Config::string('authify-log.model');
+
+        return $this->hasMany($modelClass);
     }
 }

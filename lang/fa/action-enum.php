@@ -15,4 +15,5 @@ return [
     'successful_logout'      => 'خروج موفق',
     'validated'              => 'تأیید شده',
     'verified'               => 'احراز هویت شده',
+    'unknown'                => 'ناشناخته'
 ];

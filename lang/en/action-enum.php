@@ -15,4 +15,5 @@ return [
     'successful_logout'      => 'Successful Logout',
     'validated'              => 'Validated',
     'verified'               => 'Verified',
+    'unknown'                => 'Unknown'
 ];

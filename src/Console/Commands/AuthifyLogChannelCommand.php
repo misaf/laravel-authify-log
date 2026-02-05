@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace Misaf\LaravelAuthifyLog\Console\Commands;
 
-use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redis;
-use Misaf\LaravelAuthifyLog\Jobs\AuthifyLogJob;
-use Misaf\VendraTenant\Models\Tenant;
 
-final class AuthifyLogChannelCommand extends Command
+class AuthifyLogChannelCommand extends Command
 {
     /**
      * @var string
@@ -60,29 +57,16 @@ final class AuthifyLogChannelCommand extends Command
     private function processBatch(array $entries): void
     {
         $decodedEntries = array_map(fn($item) => json_decode($item, true), $entries);
-        $groupedEntries = collect($decodedEntries)->groupBy('tenant_id')->toArray();
+        $groupedEntries = collect($decodedEntries)->toArray();
 
-        foreach ($groupedEntries as $tenantId => $groupedLogs) {
+        foreach ($groupedEntries as $groupedLogs) {
             if ( ! is_array($groupedLogs)) {
                 continue;
             }
 
-            $this->dispatchJobForTenant((int) $tenantId, $groupedLogs);
-        }
-    }
+            $modelClass = Config::string('authify-log.jobs');
 
-    /**
-     * @param  array<int, array<string, int|string>>  $groupedLogs
-     */
-    private function dispatchJobForTenant(int $tenantId, array $groupedLogs): void
-    {
-        try {
-            $tenant = Tenant::findOrFail($tenantId);
-            $tenant->makeCurrent();
-
-            AuthifyLogJob::dispatch($groupedLogs);
-        } catch (Exception $e) {
-            Log::error('Failed to dispatch job for tenant.', [$e->getMessage()]);
+            $modelClass::dispatch($groupedLogs);
         }
     }
 }

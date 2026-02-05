@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Config;
 use Misaf\LaravelAuthifyLog\Contracts\HasUsername;
 use RuntimeException;
 
-final class LoginNotification extends Notification implements ShouldQueue
+class LoginNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     public function __construct()
     {
-        $this->onQueue('transactional-email');
+        $this->onQueue('laravel-authify-log');
     }
 
     /**
@@ -41,13 +41,13 @@ final class LoginNotification extends Notification implements ShouldQueue
         $resetPasswordUrl = route('filament.panel-user.auth.password-reset.request');
 
         return (new MailMessage())
-            ->subject(__('laravel-authify-log::successfull-login-notification.login_notification'))
-            ->greeting(__('laravel-authify-log::successfull-login-notification.hello_user', ['user' => $username]))
-            ->line(__('laravel-authify-log::successfull-login-notification.we_noticed_that_your_account_was_accessed_on_our_website'))
-            ->line(__('laravel-authify-log::successfull-login-notification.if_this_was_you_no_further_action_is_required'))
-            ->line(__('laravel-authify-log::successfull-login-notification.if_this_was_not_you_please_reset_your_password_immediately_to_secure_your_account'))
-            ->action(__('laravel-authify-log::successfull-login-notification.reset_your_password'), $resetPasswordUrl)
-            ->line(__('laravel-authify-log::successfull-login-notification.thank_you_for_trusting_our_application'))
-            ->salutation(__('laravel-authify-log::successfull-login-notification.best_regards') . "\n" . Config::string('app.name'));
+            ->subject(__('authify-log::successfull-login-notification.login_notification'))
+            ->greeting(__('authify-log::successfull-login-notification.hello_user', ['user' => $username]))
+            ->line(__('authify-log::successfull-login-notification.we_noticed_that_your_account_was_accessed_on_our_website'))
+            ->line(__('authify-log::successfull-login-notification.if_this_was_you_no_further_action_is_required'))
+            ->line(__('authify-log::successfull-login-notification.if_this_was_not_you_please_reset_your_password_immediately_to_secure_your_account'))
+            ->action(__('authify-log::successfull-login-notification.reset_your_password'), $resetPasswordUrl)
+            ->line(__('authify-log::successfull-login-notification.thank_you_for_trusting_our_application'))
+            ->salutation(__('authify-log::successfull-login-notification.best_regards') . "\n" . Config::string('app.name'));
     }
 }

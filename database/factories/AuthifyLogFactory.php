@@ -12,7 +12,7 @@ use Misaf\LaravelAuthifyLog\Models\AuthifyLog;
 /**
  * @extends Factory<AuthifyLog>
  */
-final class AuthifyLogFactory extends Factory
+class AuthifyLogFactory extends Factory
 {
     /**
      * @var class-string<AuthifyLog>
@@ -33,10 +33,6 @@ final class AuthifyLogFactory extends Factory
         ];
     }
 
-    /**
-     * @param User $user
-     * @return static
-     */
     public function forUser(User $user): static
     {
         return $this->state(fn(): array => [
