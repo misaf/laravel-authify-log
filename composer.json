@@ -18,8 +18,7 @@
     ],
     "require": {
         "php": "^8.3",
-        "illuminate/support": "^11.0|^12.0",
-        "stijnvanouplines/blade-country-flags": "^1.0.7"
+        "illuminate/support": "^11.0|^12.0|^13.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24.1",
