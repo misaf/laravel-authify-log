@@ -4,7 +4,6 @@
     "description": "A logging utility for user authentication activities in Laravel.",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.1",
     "keywords": [
         "laravel",
         "authify",
