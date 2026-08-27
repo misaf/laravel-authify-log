@@ -11,12 +11,15 @@
         <testsuite name="Feature">
             <directory>tests/Feature</directory>
         </testsuite>
+        <testsuite name="Architecture">
+            <directory>tests/Architecture</directory>
+        </testsuite>
     </testsuites>
 
     <source>
         <include>
             <directory suffix=".php">database</directory>
-            <directory suffix=".php">lang</directory>
+            <directory suffix=".php">resources/lang</directory>
             <directory suffix=".php">src</directory>
         </include>
     </source>

@@ -9,8 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Config;
-use Misaf\LaravelAuthifyLog\Contracts\HasUsername;
-use RuntimeException;
+use Illuminate\Support\Facades\Route;
+use Misaf\LaravelAuthifyLog\Contracts\ResolvesUsers;
 
 class LoginNotification extends Notification implements ShouldQueue
 {
@@ -18,7 +18,7 @@ class LoginNotification extends Notification implements ShouldQueue
 
     public function __construct()
     {
-        $this->onQueue('laravel-authify-log');
+        $this->onQueue(Config::string('authify-log.queue'));
     }
 
     /**
@@ -31,23 +31,41 @@ class LoginNotification extends Notification implements ShouldQueue
 
     public function toMail(object $notifiable): MailMessage
     {
-        if ( ! $notifiable instanceof HasUsername) {
-            throw new RuntimeException(
-                'Notifiable must implement HasUsername to receive LoginNotification.'
-            );
-        }
+        $username = app(ResolvesUsers::class)->name($notifiable);
 
-        $username = $notifiable->getAuthifyLogUsername();
-        $resetPasswordUrl = route('filament.panel-user.auth.password-reset.request');
-
-        return (new MailMessage())
+        $message = new MailMessage()
             ->subject(__('authify-log::successfull-login-notification.login_notification'))
             ->greeting(__('authify-log::successfull-login-notification.hello_user', ['user' => $username]))
             ->line(__('authify-log::successfull-login-notification.we_noticed_that_your_account_was_accessed_on_our_website'))
             ->line(__('authify-log::successfull-login-notification.if_this_was_you_no_further_action_is_required'))
-            ->line(__('authify-log::successfull-login-notification.if_this_was_not_you_please_reset_your_password_immediately_to_secure_your_account'))
-            ->action(__('authify-log::successfull-login-notification.reset_your_password'), $resetPasswordUrl)
+            ->line(__('authify-log::successfull-login-notification.if_this_was_not_you_please_reset_your_password_immediately_to_secure_your_account'));
+
+        // The reset route belongs to the host application, which may not define
+        // it at all; omit the button rather than throwing during delivery.
+        $resetPasswordUrl = $this->resetPasswordUrl();
+
+        if (null !== $resetPasswordUrl) {
+            $message->action(
+                __('authify-log::successfull-login-notification.reset_your_password'),
+                $resetPasswordUrl,
+            );
+        }
+
+        return $message
             ->line(__('authify-log::successfull-login-notification.thank_you_for_trusting_our_application'))
-            ->salutation(__('authify-log::successfull-login-notification.best_regards') . "\n" . Config::string('app.name'));
+            ->salutation(
+                __('authify-log::successfull-login-notification.best_regards') . "\n" . Config::string('app.name'),
+            );
+    }
+
+    private function resetPasswordUrl(): ?string
+    {
+        $route = Config::get('authify-log.password_reset_route');
+
+        if ( ! is_string($route) || '' === $route || ! Route::has($route)) {
+            return null;
+        }
+
+        return route($route);
     }
 }

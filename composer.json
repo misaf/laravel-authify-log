@@ -4,20 +4,26 @@
     "description": "A logging utility for user authentication activities in Laravel.",
     "type": "library",
     "license": "MIT",
+    "homepage": "https://github.com/misaf/laravel-authify-log",
     "keywords": [
         "laravel",
         "authify",
-        "log"
+        "log",
+        "authentication",
+        "audit-log",
+        "security"
     ],
     "authors": [
         {
             "name": "Ehsan Mahmoodi",
-            "email": "misaf.1990@gmail.com"
+            "email": "misaf.1990@gmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.3",
-        "illuminate/support": "^11.0|^12.0|^13.0"
+        "php": "^8.4",
+        "illuminate/support": "^12.0|^13.0",
+        "spatie/laravel-package-tools": "^1.92.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24.1",
@@ -30,25 +36,39 @@
         "pestphp/pest": "^4.3.2",
         "pestphp/pest-plugin-laravel": "^4.0",
         "pestphp/pest-plugin-profanity": "^4.2.1",
-        "pestphp/pest-plugin-type-coverage": "^4.0.3"
+        "pestphp/pest-plugin-type-coverage": "^4.0.3",
+        "predis/predis": "^3.6"
     },
-    "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "pest"
+    "suggest": {
+        "stijnvanouplines/blade-country-flags": "Render the stored ip_country as a flag in your Blade views (^1.0.7)",
+        "ext-redis": "Required by the default \"redis\" buffering driver"
     },
     "autoload": {
         "psr-4": {
             "Misaf\\LaravelAuthifyLog\\": "src/",
-            "Misaf\\LaravelAuthifyLog\\Tests\\": "tests/",
-            "Misaf\\LaravelAuthifyLog\\Database\\Factories\\": "database/factories/",
-            "Misaf\\LaravelAuthifyLog\\Database\\Seeders\\": "database/seeders/"
+            "Misaf\\LaravelAuthifyLog\\Database\\Factories\\": "database/factories/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Misaf\\LaravelAuthifyLog\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse --memory-limit=1G",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "test-type-coverage": "vendor/bin/pest --type-coverage",
+        "format": "vendor/bin/pint"
     },
     "extra": {
         "laravel": {
             "providers": [
                 "Misaf\\LaravelAuthifyLog\\Providers\\AuthifyLogServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Authify": "Misaf\\LaravelAuthifyLog\\Facades\\Authify"
+            }
         }
     },
     "config": {

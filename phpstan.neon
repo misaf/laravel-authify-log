@@ -4,11 +4,24 @@ includes:
 
 parameters:
 
+    phpVersion: 80400
+
+    # The parallel workers need more than PHP's 128M default.
+    parallel:
+        maximumNumberOfProcesses: 4
+
     paths:
         - src/
 
     # Level 10 is the highest level
     level: 10
+
+    ignoreErrors:
+        # HasAuthifyLog is applied by the consuming application's own models,
+        # so nothing inside this package ever uses it.
+        -
+            identifier: trait.unused
+            path: src/Traits/HasAuthifyLog.php
 #
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php

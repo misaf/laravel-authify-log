@@ -2,54 +2,71 @@
 
 declare(strict_types=1);
 
+use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\ServiceProvider;
+use Misaf\LaravelAuthifyLog\Contracts\Ingest;
+use Misaf\LaravelAuthifyLog\Contracts\Recorder;
+use Misaf\LaravelAuthifyLog\Contracts\Storage;
+
 arch()
-    ->expect('Database\Factories')
+    ->expect('Misaf\LaravelAuthifyLog')
     ->toUseStrictTypes()
+    ->not->toHaveSuspiciousCharacters()
+    ->not->toUse(['die', 'dd', 'dump', 'var_dump', 'ray']);
+
+arch()
+    ->expect('Misaf\LaravelAuthifyLog\Database\Factories')
     ->toHavePrefix('AuthifyLog')
     ->toHaveSuffix('Factory')
     ->toBeClasses()
-    ->toBeFinal()
-    ->toExtend('Illuminate\Database\Eloquent\Factories\Factory')
-    ->toHaveMethod('definition')
-    ->toHavePropertiesDocumented()
-    ->toHaveMethodsDocumented()
-    ->not->toHaveSuspiciousCharacters()
-    ->not->toUse(['die', 'dd', 'dump']);
+    ->toExtend(Factory::class)
+    ->toHaveMethod('definition');
 
 arch()
-    ->expect('Database\Migrations')
-    ->toUseStrictTypes()
-    ->toHavePrefix('_table')
-    ->toHaveSuffix('create_')
-    ->toBeClasses()
-    ->toBeFinal()
-    ->toExtend('Illuminate\Database\Migrations\Migration')
-    ->toHaveMethods(['up', 'down'])
-    ->toHavePropertiesDocumented()
-    ->toHaveMethodsDocumented()
-    ->not->toHaveSuspiciousCharacters()
-    ->not->toUse(['die', 'dd', 'dump']);
-
-arch()
-    ->expect('Lang')
-    ->toUseStrictTypes()
-    ->not->toHaveSuspiciousCharacters()
-    ->not->toUse(['die', 'dd', 'dump']);
-
-arch()
-    ->expect('Models')
-    ->toUseStrictTypes()
+    ->expect('Misaf\LaravelAuthifyLog\Models')
     ->toHavePrefix('AuthifyLog')
     ->toBeClasses()
-    ->toExtend('Illuminate\Database\Eloquent\Model')
-    ->toHavePropertiesDocumented()
-    ->toHaveMethodsDocumented()
-    ->not->toHaveSuspiciousCharacters()
-    ->not->toUse(['die', 'dd', 'dump']);
+    ->toExtend(Model::class);
 
 arch()
-    ->expect('Src\Providers')
+    ->expect('Misaf\LaravelAuthifyLog\Providers')
     ->toBeClasses()
-    ->toExtend('Illuminate\Support\ServiceProvider')
-    ->toHaveMethods(['register', 'boot'])
-    ->not->toUse(['die', 'dd', 'dump']);
+    ->toBeFinal()
+    ->toExtend(ServiceProvider::class)
+    ->toHaveMethods(['register', 'boot']);
+
+arch()
+    ->expect('Misaf\LaravelAuthifyLog\Ingests')
+    ->toBeClasses()
+    ->toImplement(Ingest::class)
+    ->toHaveSuffix('Ingest');
+
+arch()
+    ->expect('Misaf\LaravelAuthifyLog\Storage')
+    ->toBeClasses()
+    ->toImplement(Storage::class)
+    ->toHaveSuffix('Storage');
+
+arch()
+    ->expect('Misaf\LaravelAuthifyLog\Recorders')
+    ->toBeClasses()
+    ->toImplement(Recorder::class);
+
+arch()
+    ->expect('Misaf\LaravelAuthifyLog\Commands')
+    ->toBeClasses()
+    ->toExtend(Command::class)
+    ->toHaveSuffix('Command');
+
+arch()
+    ->expect('Misaf\LaravelAuthifyLog\Enums')
+    ->toBeEnums()
+    ->toHaveSuffix('Enum');
+
+arch()
+    ->expect('Misaf\LaravelAuthifyLog\Contracts')
+    ->toBeInterfaces();
+
+arch()->preset()->php();

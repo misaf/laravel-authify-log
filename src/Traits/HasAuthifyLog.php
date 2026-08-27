@@ -4,42 +4,57 @@ declare(strict_types=1);
 
 namespace Misaf\LaravelAuthifyLog\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Config;
 
 /**
- * @template AuthifyLog of \Illuminate\Database\Eloquent\Model
+ * @phpstan-require-extends Model
  */
 trait HasAuthifyLog
 {
     /**
-     * @return HasOne<AuthifyLog>
+     * @return HasOne<Model, $this>
      */
     public function latestAuthifyLog(): HasOne
     {
-        $modelClass = Config::string('authify-log.model');
-
-        return $this->hasOne($modelClass)->latestOfMany();
+        return $this->hasOne(self::authifyLogModel(), self::authifyLogForeignKey())->latestOfMany();
     }
 
     /**
-     * @return HasOne<AuthifyLog>
+     * @return HasOne<Model, $this>
      */
     public function oldestAuthifyLog(): HasOne
     {
-        $modelClass = Config::string('authify-log.model');
-
-        return $this->hasOne($modelClass)->oldestOfMany();
+        return $this->hasOne(self::authifyLogModel(), self::authifyLogForeignKey())->oldestOfMany();
     }
 
     /**
-     * @return HasOne<AuthifyLog>
+     * @return HasMany<Model, $this>
      */
     public function authifyLogs(): HasMany
     {
+        return $this->hasMany(self::authifyLogModel(), self::authifyLogForeignKey());
+    }
+
+    /**
+     * @return class-string<Model>
+     */
+    private static function authifyLogModel(): string
+    {
+        /** @var class-string<Model> $modelClass */
         $modelClass = Config::string('authify-log.model');
 
-        return $this->hasMany($modelClass);
+        return $modelClass;
+    }
+
+    /**
+     * The column is always `user_id`, regardless of what the parent model is
+     * called, so it must be named explicitly rather than inferred.
+     */
+    private static function authifyLogForeignKey(): string
+    {
+        return Config::string('authify-log.foreign_key');
     }
 }
